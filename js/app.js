@@ -9,7 +9,7 @@ var app = function() {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/medieval_fantasy_book/scene.gltf", (gltf) => {
             book = gltf.scene;
-            book.scale.setScalar(0.7);
+            book.scale.setScalar(0.6);
             book.position.x = 2;
             book.rotation.y = MY_LIBS.degToRad(0);
             scene.add(book);
@@ -23,9 +23,9 @@ var app = function() {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/mei/scene.gltf", (gltf) => {
             mei = gltf.scene;
-            mei.scale.setScalar(0.07);
+            mei.scale.setScalar(0.06);
             mei.position.x = 0;
-            mei.rotation.y = MY_LIBS.degToRad(0);
+            mei.rotation.y = MY_LIBS.degToRad(180);
             mei.position.z = 5;
             scene.add(mei);
             mixerMei = new THREE.AnimationMixer(mei);
