@@ -5,95 +5,6 @@ var app = function() {
     let mixerBook, mixerMei;
     const A_key = 65, D_key = 68;
     var position = new THREE.Vector3();
-    var create_crate = function() {
-        // texture
-        var crate_texture = new THREE.TextureLoader().load("./data/textures/crate/crate0_diffuse.png");
-        var bump_map_texture = new THREE.TextureLoader().load("./data/textures/crate/crate0_bump.png");
-        var normal_map_texture = new THREE.TextureLoader().load("./data/textures/crate/crate0_normal.png");
-
-        // geometry
-        const geometryCube = new THREE.CubeGeometry(1, 1, 1);
-
-        // material
-        const material = new THREE.MeshPhongMaterial({map: crate_texture, bumpMap: bump_map_texture, normalMap: normal_map_texture});
-
-        // object
-        cube = new THREE.Mesh(geometryCube, material);
-        cube.position.z = 2;
-
-        scene.add(cube);
-    };
-    var create_skybox = function() {
-        // geometry
-        const geometryBox = new THREE.BoxGeometry(100, 100, 100);
-
-        // texture
-        var front_texture = new THREE.TextureLoader().load("./data/textures/skybox/arid2_ft.jpg");
-        var back_texture = new THREE.TextureLoader().load("./data/textures/skybox/arid2_bk.jpg");
-        var up_texture = new THREE.TextureLoader().load("./data/textures/skybox/arid2_up.jpg");
-        var down_texture = new THREE.TextureLoader().load("./data/textures/skybox/arid2_dn.jpg");
-        var right_texture = new THREE.TextureLoader().load("./data/textures/skybox/arid2_rt.jpg");
-        var left_texture = new THREE.TextureLoader().load("./data/textures/skybox/arid2_lf.jpg");
-
-        // add textures to material arrays
-        var materials= [];
-        materials.push(new THREE.MeshBasicMaterial({map: front_texture}));
-        materials.push(new THREE.MeshBasicMaterial({map: back_texture}));
-        materials.push(new THREE.MeshBasicMaterial({map: up_texture}));
-        materials.push(new THREE.MeshBasicMaterial({map: down_texture}));
-        materials.push(new THREE.MeshBasicMaterial({map: right_texture}));
-        materials.push(new THREE.MeshBasicMaterial({map: left_texture}));
-        
-        for (var i=0; i<6; i++) {
-            materials[i].side = THREE.BackSide;
-        }
-
-        skybox = new THREE.Mesh(geometryBox, materials);
-        scene.add(skybox);
-    };
-    var create_ground = function() {
-        // geometry
-        const geometryPlane = new THREE.PlaneGeometry(1000, 1000, 50, 50);
-
-        // texture
-        var grass_texture = new THREE.TextureLoader().load("./data/textures/grass/Green-Grass-Ground-Texture-DIFFUSE.jpg");
-        var normal_texture = new THREE.TextureLoader().load("./data/textures/grass/Green-Grass-Ground-Texture-NORMAL.jpg");
-        var disp_texture = new THREE.TextureLoader().load("./data/textures/grass/Green-Grass-Ground-Texture-DISP.jpg");
-        var specular_texture = new THREE.TextureLoader().load("./data/textures/grass/Green-Grass-Ground-Texture-SPECULAR.jpg");
-
-        // material
-        var material  = new THREE.MeshPhongMaterial({map: grass_texture,
-                                                    normalMap: normal_texture,
-                                                    displacementMap: disp_texture,
-                                                    specularMap: specular_texture,
-                                                    specular: 0xffffff,
-                                                    shininess: 20});
-
-        ground = new THREE.Mesh(geometryPlane, material);
-        ground.position.z = -15;
-        ground.position.y = -10;
-        ground.rotation.x = -Math.PI/2;
-        scene.add(ground);
-    };
-    var create_envSphere = function() {
-        // geometry
-        const geometrySphere = new THREE.SphereGeometry(5, 32, 32);
-
-        // texture
-        var loader = new THREE.CubeTextureLoader();
-        loader.setPath("./data/textures/skybox/");
-        var texture_cube = loader.load([
-            'arid2_ft.jpg', 'arid2_bk.jpg', 'arid2_up.jpg', 'arid2_dn.jpg', 'arid2_rt.jpg', 'arid2_lf.jpg'
-        ]);
-        // material
-        var material  = new THREE.MeshBasicMaterial({color: 0xffffff, envMap: texture_cube});
-
-        sphere = new THREE.Mesh(geometrySphere, material);
-        sphere.position.z = -15;
-        sphere.position.x = -10;
-        
-        scene.add(sphere);
-    };
     var load_model_book = function() {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/medieval_fantasy_book/scene.gltf", (gltf) => {
@@ -167,10 +78,6 @@ var app = function() {
         scene.add(fillLight);
         scene.add(backLight);
 
-        // create_crate();
-        // create_skybox();
-        // create_ground();
-        // create_envSphere();
         load_model_book();
         load_model_mei();
 
