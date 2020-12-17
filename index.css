@@ -1,0 +1,22 @@
+* {
+  font-family: 'Tangerine', serif;
+}
+
+.title-container {
+  position: relative;
+  cursor: default;
+  pointer-events: none;
+}
+
+.title {
+
+  /* Center vertically and horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  font-size: 90px;
+}
+#curve{
+  display:none;
+}
