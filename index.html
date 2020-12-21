@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" onkeypress="myFunction(event)">
 
 <head>
   <meta charset="UTF-8">
@@ -34,6 +34,25 @@
     </svg>
   </div>
 
+  <div class="title-container">
+    <div class="mini-title">
+      &#9834;~Press "Enter" to play~&#9834;
+    </div>
+  </div>
+  <script>
+  window.onresize = function (event) {
+    var maxHeight = window.screen.height,
+        maxWidth = window.screen.width,
+        curHeight = window.innerHeight,
+        curWidth = window.innerWidth;
+
+    if (maxWidth == curWidth && maxHeight == curHeight) {
+        window.location.reload();
+    } else {
+      window.location.reload();
+    }
+}
+  </script>
 </body>
 
 </html>
