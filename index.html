@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" onkeypress="entergame(event)">
+<html lang="en" onkeypress="enterGame(event)">
 
 <head>
   <meta charset="UTF-8">
@@ -39,6 +39,8 @@
       &#9834;~Press "Enter" to play~&#9834;
     </div>
   </div>
+
+  
   <script>
   window.onresize = function (event) {     // hàm này để refesh để resize sau khi f11 
     var maxHeight = window.screen.height,
@@ -52,7 +54,7 @@
       window.location.reload();
     }
 }
-function entergame(event) { // reload để vào game sửa cái file app() lại là ngon đen à
+function enterGame(event) { // reload để vào game sửa cái file app() lại là ngon đen à
   var code = event.which || event.keyCode;
   if(code == 13) {
     document.body.innerHTML = '';
