@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="./index.css">
   <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
 
-
 </head>
 
 <body onload='app()'>
@@ -40,27 +39,27 @@
     </div>
   </div>
 
-  
   <script>
-  window.onresize = function (event) {     // hàm này để refesh để resize sau khi f11 
-    var maxHeight = window.screen.height,
+    window.onresize = function (event) {     // hàm này để refesh để resize sau khi f11 
+      var maxHeight = window.screen.height,
         maxWidth = window.screen.width,
         curHeight = window.innerHeight,
         curWidth = window.innerWidth;
-
-    if (maxWidth == curWidth && maxHeight == curHeight) {
+      if (maxWidth == curWidth && maxHeight == curHeight) {
         window.location.reload();
-    } else {
-      window.location.reload();
+      } else {
+        window.location.reload();
+      }
     }
-}
-function enterGame(event) { // reload để vào game sửa cái file app() lại là ngon đen à
-  var code = event.which || event.keyCode;
-  if(code == 13) {
-    document.body.innerHTML = '';
-    window.onloadeddata = app();
-  }
-}
+    function enterGame(event) { // reload để vào game sửa cái file app() lại là ngon đen à
+      var code = event.keyCode;
+      if (code == 13) {
+        document.body.innerHTML = '';
+        window.onloadeddata = app();
+      } else {
+        window.onloadeddata = tuan();
+      }
+    }
   </script>
 </body>
 
