@@ -1,4 +1,9 @@
 var playground = function() {
+    document.addEventListener("click", function(){
+        document.getElementById("blocker").innerHTML = "";
+        document.getElementById("blocker").style.background = "none";
+        controls.lock();
+      });
     var scene = new THREE.Scene();
     var cam = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 1, 1000);
     var renderer = new THREE.WebGLRenderer();
@@ -15,10 +20,10 @@ var playground = function() {
     });
 
     document.addEventListener("keydown", enterStartScreen); 
-    function enterStartScreen() {
+    function enterStartScreen(event) {
         var KeyID = event.keyCode;
         if (KeyID == 8) {
-            window.location.replace("./startscreen.html");
+            window.location.replace("./index.html");
         }
     }    
 
