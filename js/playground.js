@@ -1,7 +1,27 @@
-var app = function() {
+var playground = function() {
     var scene = new THREE.Scene();
     var cam = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 1, 100);
     var renderer = new THREE.WebGLRenderer();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    window.addEventListener("resize", function () {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.UpdateProjectionMatrix();
+    });
+
+    document.addEventListener("keydown", enterStartScreen); 
+    function enterStartScreen() {
+        var KeyID = event.keyCode;
+        if (KeyID == 8) {
+            window.location.replace("./startscreen.html");
+        }
+    }    
+
     scene.background = new THREE.Color(0xfafafa);
     renderer.setSize(innerWidth, innerHeight);
     cam.position.x = -16;
