@@ -35,7 +35,7 @@ var app = function() {
         });
     };
     var onKeyDown = function(e) {
-        console.log("The current key: " + e.keyCode);
+        // console.log("The current key: " + e.keyCode);
         switch(e.keyCode) {
             case A_key:
                 mei.position.x += -0.5;
@@ -43,7 +43,7 @@ var app = function() {
             case D_key:
                 mei.position.x += 0.5;
             default:
-                console.log("The current key: " + e.keyCode);
+                // console.log("The current key: " + e.keyCode);    
         }
     };
     var init_app = function() {
