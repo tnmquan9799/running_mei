@@ -4,6 +4,7 @@ var playground = function() {
     let camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 1, 1000);
     let controls = new THREE.PointerLockControls(camera, document.body);
     let raycaster;
+
     let mixerBook;
     let clock = new THREE.Clock();
 
