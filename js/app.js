@@ -1,11 +1,11 @@
-var app = function() {
+var app = function () {
     // init scene, camera, objects and renderer
     var scene, camera, renderer;
     const clock = new THREE.Clock();
     let mixerBook, mixerMei;
     const A_key = 65, D_key = 68;
     var position = new THREE.Vector3();
-    var load_model_book = function() {
+    var load_model_book = function () {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/medieval_fantasy_book/scene.gltf", (gltf) => {
             book = gltf.scene;
@@ -19,7 +19,7 @@ var app = function() {
             })
         });
     };
-    var load_model_mei = function() {
+    var load_model_mei = function () {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/mei/scene.gltf", (gltf) => {
             mei = gltf.scene;
@@ -34,19 +34,19 @@ var app = function() {
             })
         });
     };
-    var onKeyDown = function(e) {
+    var onKeyDown = function (e) {
         // console.log("The current key: " + e.keyCode);
-        switch(e.keyCode) {
+        switch (e.keyCode) {
             case A_key:
                 mei.position.x += -0.5;
                 break;
             case D_key:
                 mei.position.x += 0.5;
             default:
-                // console.log("The current key: " + e.keyCode);    
+            // console.log("The current key: " + e.keyCode);    
         }
     };
-    var init_app = function() {
+    var init_app = function () {
 
         // 1. Create the scene
         scene = new THREE.Scene();
@@ -61,20 +61,20 @@ var app = function() {
         // 3. Create and locate the objects on the scene
 
         // light
-        const ambientLight = new THREE.AmbientLight(0xffffff,0.2);		
-		const pointLight = new THREE.PointLight(0xffffff,1);
-		pointLight.position.set(0, 100, 0);
-		// add three directional lights
-		const keyLight = new THREE.DirectionalLight(0xffffff, 1);
-		keyLight.position.set(100,0,-100);
-		const fillLight = new THREE.DirectionalLight(0xffffff, 1);
-		fillLight.position.set(150,0,100);
-		const backLight = new THREE.DirectionalLight(0xffffff, 1);
-		backLight.position.set(-150,0,100);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(0, 100, 0);
+        // add three directional lights
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1);
+        keyLight.position.set(100, 0, -100);
+        const fillLight = new THREE.DirectionalLight(0xffffff, 1);
+        fillLight.position.set(150, 0, 100);
+        const backLight = new THREE.DirectionalLight(0xffffff, 1);
+        backLight.position.set(-150, 0, 100);
 
         scene.add(ambientLight);
         scene.add(pointLight);
-        scene.add(keyLight);    
+        scene.add(keyLight);
         scene.add(fillLight);
         scene.add(backLight);
 
@@ -85,10 +85,17 @@ var app = function() {
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
+
+        window.addEventListener("resize", function () {
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+        });
         // document.addEventListener("keydown", onKeyDown, false);
     };
     // main animation loop - calls every 50-60ms
-    var mainLoop = function() {
+    var mainLoop = function () {
         requestAnimationFrame(mainLoop);
         const delta = clock.getDelta();
         mixerBook.update(delta);
