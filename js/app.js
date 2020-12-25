@@ -81,7 +81,6 @@ var app = function() {
         load_model_book();
         load_model_mei();
 
-        scene.updateMatrixWorld(true);
         // 4. Create the renderer
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -94,9 +93,7 @@ var app = function() {
         const delta = clock.getDelta();
         mixerBook.update(delta);
         mixerMei.update(delta);
-        // mei.rotation.y += 0.01
-        position.getPositionFromMatrix(mei.matrixWorld);
-        console.log("Position: " + position.x + ", " + position.y + ", " + position.z);
+        mei.rotation.y += 0.01
         renderer.render(scene, camera);
     };
     init_app();

@@ -1,6 +1,6 @@
-var app = function() {
+var playground = function() {
     var scene = new THREE.Scene();
-    var cam = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 1, 100);
+    var cam = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 1, 1000);
     var renderer = new THREE.WebGLRenderer();
     scene.background = new THREE.Color(0xfafafa);
     renderer.setSize(innerWidth, innerHeight);
@@ -11,6 +11,7 @@ var app = function() {
     let clock = new THREE.Clock();
     let mixerBook;
     var camPosition = new THREE.Vector3();
+    const velocity = new THREE.Vector3();
 
     var directionalLight = new THREE.DirectionalLight({color: 0xFFFFFFF, intensity: 100});
     directionalLight.position.set(0, 1, 0);
@@ -21,11 +22,6 @@ var app = function() {
     scene.updateMatrixWorld(true);
 
     let controls = new THREE.PointerLockControls(cam, renderer.domElement);
-
-    // let btn1 = document.querySelector("#button1");
-    // btn1.addEventListener('click', () => {
-    //     controls.lock();
-    // });
 
     let keyboard = [];
     addEventListener('keydown', (e) => {
@@ -42,7 +38,6 @@ var app = function() {
         }
         if (keyboard['w']) {
             controls.moveForward(SPEED);
-            console.log("AAAAAAAAAAAAAA");
         }
         if (keyboard['s']) {
             controls.moveForward(-SPEED);
@@ -53,7 +48,11 @@ var app = function() {
         if(keyboard['a']) {
             controls.moveRight(-SPEED);
         }
+        if(keyboard[' ']) {
+            controls.getObject().position.y += 0.01;
+        }
     };
+
     var load_model_book = function() {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/medieval_fantasy_book/scene.gltf", (gltf) => {
