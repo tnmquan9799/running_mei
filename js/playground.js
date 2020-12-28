@@ -75,6 +75,23 @@ var playground = function () {
         };
 
         load_model_book();
+        
+        const blocker = document.getElementById('blocker');
+        const instructions = document.getElementById('instructions');
+
+        instructions.addEventListener('click', function() {
+            controls.lock();
+        }, false);
+
+        controls.addEventListener('lock', function() {
+            instructions.style.display = 'none';
+            blocker.style.display = 'none';
+        });
+
+        controls.addEventListener('unlock', function() {
+            instructions.style.display = '';
+            blocker.style.display = 'none';
+        });
 
         const onKeyDown = function (event) {
 
