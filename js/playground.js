@@ -74,7 +74,7 @@ var playground = function() {
 
         controls.addEventListener('unlock', function() {
             instructions.style.display = '';
-            blocker.style.display = 'none';
+            blocker.style.display = 'block';
         });
         
         // SOUND
@@ -89,10 +89,6 @@ var playground = function() {
         const onKeyDown = function ( event ) {
 
             switch ( event.keyCode ) {
-                
-                case 80: // p
-                    controls.lock();
-                    break;
                 case 38: // up
                 case 87: // w
                     moveForward = true;
