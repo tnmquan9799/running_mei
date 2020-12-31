@@ -25,6 +25,10 @@ var playground = function () {
     let camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 1000);
     let controls = new THREE.PointerLockControls(camera, document.body);
     let raycaster;
+    
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
+    const sound = new THREE.Audio(listener);
 
     let mixerBook;
     let clock = new THREE.Clock();
@@ -90,16 +94,21 @@ var playground = function () {
 
         controls.addEventListener('unlock', function() {
             instructions.style.display = '';
-            blocker.style.display = 'none';
+            blocker.style.display = 'block';
+        });
+        
+        // SOUND
+        const audioLoader = new THREE.AudioLoader();
+        audioLoader.load('./forest.ogg', function(buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(true);
+            sound.setVolume(0.1);
+            sound.play();
         });
 
         const onKeyDown = function (event) {
 
             switch (event.keyCode) {
-
-                case 80: // p
-                    controls.lock();
-                    break;
                 case 38: // up
                 case 87: // w
                     moveForward = true;
