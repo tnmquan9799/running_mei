@@ -92,7 +92,7 @@ var app = function () {
             renderer.setSize(width, height);
             camera.aspect = width / height;
         });
-        // document.addEventListener("keydown", onKeyDown, false);
+      
     };
     // main animation loop - calls every 50-60ms
     var mainLoop = function () {

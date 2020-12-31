@@ -40,4 +40,9 @@ body {
     cursor: pointer;
 }
 
+#play{
+    background: none; 
+    color: #ffffff;
+}
+
 /* __________________________ Bird __________________ */
