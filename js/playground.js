@@ -108,7 +108,7 @@ var playground = function () {
 
         // SOUND
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('./forest.ogg', function (buffer) {
+        audioLoader.load('./data/audio/forest.ogg', function (buffer) {
             sound.setBuffer(buffer);
             sound.setLoop(true);
             sound.setVolume(0.1);
@@ -204,7 +204,7 @@ var playground = function () {
             objects.push(box);
         }
 
-        scene.background = new THREE.TextureLoader().load("./data/background/sky2.jpg");
+        scene.background = new THREE.TextureLoader().load("./data/background/sky.jpg");
         camera.position.set(0, 5, 0);
 
         renderer = new THREE.WebGLRenderer();
@@ -232,7 +232,6 @@ var playground = function () {
             velocity.y -= 9.8 * 100.0 * delta/1.5; // 100.0 = mass
             direction.z = Number(moveForward) - Number(moveBackward);
             direction.x = Number(moveRight) - Number(moveLeft);
-            direction.normalize(); // this ensures consistent movements in all directions
             if (moveForward || moveBackward) velocity.z -= direction.z * 2000.0 * delta; // cho ni chay nhanh
             if (moveLeft || moveRight) velocity.x -= direction.x * 2000.0 * delta; // cho ni chay nhanh lun
             if (onObject === true) {
