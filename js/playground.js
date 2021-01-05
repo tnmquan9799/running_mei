@@ -1,4 +1,10 @@
 var playground = function() {
+    document.addEventListener("click", () => {
+        document.getElementById("blocker").innerHTML = "";
+        document.getElementById("blocker").style.background = "none";
+        controls.lock();
+    });
+
     const objects = [];
     let scene, renderer;
     let camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 1, 1000);
@@ -23,6 +29,8 @@ var playground = function() {
     const direction = new THREE.Vector3();
     const color = new THREE.Color();
 
+    const blocker = document.getElementById('blocker');
+    const instructions = document.getElementById('instructions');
 
     init();
     animate();
@@ -60,13 +68,7 @@ var playground = function() {
 
         load_model_book();
         
-        const blocker = document.getElementById('blocker');
-        const instructions = document.getElementById('instructions');
-
-        instructions.addEventListener('click', function() {
-            controls.lock();
-        }, false);
-
+        // INSTRUCTIONS
         controls.addEventListener('lock', function() {
             instructions.style.display = 'none';
             blocker.style.display = 'none';
@@ -74,12 +76,12 @@ var playground = function() {
 
         controls.addEventListener('unlock', function() {
             instructions.style.display = '';
-            blocker.style.display = 'none';
+            blocker.style.display = 'block';
         });
         
         // SOUND
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('./forest.ogg', function(buffer) {
+        audioLoader.load('./data/audio/forest.ogg', function(buffer) {
             sound.setBuffer(buffer);
             sound.setLoop(true);
             sound.setVolume(0.1);
@@ -89,10 +91,6 @@ var playground = function() {
         const onKeyDown = function ( event ) {
 
             switch ( event.keyCode ) {
-                
-                case 80: // p
-                    controls.lock();
-                    break;
                 case 38: // up
                 case 87: // w
                     moveForward = true;
@@ -171,7 +169,7 @@ var playground = function() {
 
         boxGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colorsBox, 3 ) );
 
-        for ( let i = 0; i < 500; i ++ ) {
+        for ( let i = 0; i < 300; i ++ ) {
             const boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: true } );
             boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
 
@@ -185,7 +183,7 @@ var playground = function() {
         }
 
         scene.background = new THREE.TextureLoader().load("./data/background/sky2.jpg");
-        camera.position.set(0, 5, 0);
+        camera.position.set(0, 700, 0);
 
         renderer = new THREE.WebGLRenderer();
         renderer.setPixelRatio( window.devicePixelRatio );
@@ -222,10 +220,19 @@ var playground = function() {
             controls.moveRight( - velocity.x * delta );
             controls.moveForward( - velocity.z * delta );
             controls.getObject().position.y += ( velocity.y * delta); // new behavior // cho ni nhay cao
-            if ( controls.getObject().position.y < 10 ) {
+            if (controls.getObject().position.y < 10) {
                 velocity.y = 0;
                 controls.getObject().position.y = 10;
                 canJump = true;
+            }
+            
+            // GAME OVER
+
+            if (controls.getObject().position.y > 600) {
+                document.getElementById("endgame").style.background = "rgba(0, 0, 0, 0.5)";
+                document.getElementById("endgame").style.display = "block";
+                controls.unlock();
+                console.log("AABABA");
             }
         }
         prevTime = time;
