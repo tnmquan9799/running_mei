@@ -1,6 +1,5 @@
 var playground = function () {
-    const endgameContainer = document.getElementById("endgame-container");
-    const endgame = document.getElementById("endgame");
+
     document.addEventListener("keydown", backToIndex);
     document.addEventListener("keydown",replay);
     function replay(event){
@@ -9,12 +8,13 @@ var playground = function () {
             location.replace("./gameScreen.html");
         }
     };
+
     function backToIndex(event) {
         var x = event.which || event.keyCode;
         if (x == 8) {
             location.replace("./index.html");
         }
-    }
+    };
 
     window.addEventListener("resize", function () {
         var width = window.innerWidth;
@@ -47,8 +47,14 @@ var playground = function () {
     const direction = new THREE.Vector3();
     const color = new THREE.Color();
 
+    const endgameContainer = document.getElementById("endgame-container");
+    const endgame = document.getElementById("endgame");
+    const blocker = document.getElementById('blocker');
+    const instructions = document.getElementById('instructions');
+
     init();
     animate();
+    console.log(maxHeight);
 
     // INIT
     function init() {
@@ -82,9 +88,6 @@ var playground = function () {
         };
 
         load_model_book();
-
-        const blocker = document.getElementById('blocker');
-        const instructions = document.getElementById('instructions');
 
         // Endgame popup
 
@@ -175,7 +178,7 @@ var playground = function () {
 
         // objects
 
-        const boxGeometry = new THREE.BoxBufferGeometry(20, 10, 30).toNonIndexed();
+        const boxGeometry = new THREE.BoxBufferGeometry(20, 5, 40).toNonIndexed();
 
         position = boxGeometry.attributes.position;
         const colorsBox = [];
@@ -246,11 +249,12 @@ var playground = function () {
             }
 
             //EndGame
-            if (controls.getObject().position.y > 600) {
+            if (controls.getObject().position.y > 700) {
                 endgameContainer.style.display = 'block';
                 endgame.style.display = 'block';
+                controls.unlock();
+                blocker.innerHTML = '';
             }
-
         }
         prevTime = time;
         renderer.render(scene, camera);
