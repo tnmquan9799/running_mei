@@ -50,7 +50,7 @@ var app = function () {
 
         // 1. Create the scene
         scene = new THREE.Scene();
-        scene.background = new THREE.TextureLoader().load("./data/background/sky2.jpg");
+        scene.background = new THREE.TextureLoader().load("./data/background/sky.jpg");
 
         // 2. Create and locate the camera
         var fieldOfViewY = 60, aspectRatio = window.innerWidth / window.innerHeight, near = 0.1, far = 100.0;
