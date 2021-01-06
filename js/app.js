@@ -3,8 +3,6 @@ var app = function () {
     var scene, camera, renderer;
     const clock = new THREE.Clock();
     let mixerBook, mixerMei;
-    const A_key = 65, D_key = 68;
-    var position = new THREE.Vector3();
     var load_model_book = function () {
         var gltfLoader = new THREE.GLTFLoader();
         gltfLoader.load("./data/models/medieval_fantasy_book/scene.gltf", (gltf) => {
@@ -34,18 +32,7 @@ var app = function () {
             })
         });
     };
-    var onKeyDown = function (e) {
-        // console.log("The current key: " + e.keyCode);
-        switch (e.keyCode) {
-            case A_key:
-                mei.position.x += -0.5;
-                break;
-            case D_key:
-                mei.position.x += 0.5;
-            default:
-            // console.log("The current key: " + e.keyCode);    
-        }
-    };
+
     var init_app = function () {
 
         // 1. Create the scene
