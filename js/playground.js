@@ -54,7 +54,6 @@ var playground = function () {
 
     init();
     animate();
-    console.log(maxHeight);
 
     // INIT
     function init() {
@@ -65,10 +64,6 @@ var playground = function () {
         scene.add(directionalLight);
         var ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.5);
         scene.add(ambientLight);
-
-        // let grid = new THREE.GridHelper(100, 20, 0x0a0a0a, 0x0a0a0a);
-        // grid.position.set(0, -0.5, 0);
-        // scene.add(grid);
 
         controls = new THREE.PointerLockControls(camera, document.body);
         scene.updateMatrixWorld(true);
@@ -88,9 +83,6 @@ var playground = function () {
         };
 
         load_model_book();
-
-        // Endgame popup
-
 
         instructions.addEventListener('click', function () {
             controls.lock();
@@ -232,15 +224,15 @@ var playground = function () {
             velocity.y -= 9.8 * 100.0 * delta/1.5; // 100.0 = mass
             direction.z = Number(moveForward) - Number(moveBackward);
             direction.x = Number(moveRight) - Number(moveLeft);
-            if (moveForward || moveBackward) velocity.z -= direction.z * 2000.0 * delta; // cho ni chay nhanh
-            if (moveLeft || moveRight) velocity.x -= direction.x * 2000.0 * delta; // cho ni chay nhanh lun
+            if (moveForward || moveBackward) velocity.z -= direction.z * 2000.0 * delta;
+            if (moveLeft || moveRight) velocity.x -= direction.x * 2000.0 * delta;
             if (onObject === true) {
                 velocity.y = Math.max(0, velocity.y);
                 canJump = true;
             }
             controls.moveRight(- velocity.x * delta);
             controls.moveForward(- velocity.z * delta);
-            controls.getObject().position.y += (velocity.y * delta); // new behavior // cho ni nhay cao
+            controls.getObject().position.y += (velocity.y * delta);
             if (controls.getObject().position.y < 10) {
                 velocity.y = 0;
                 controls.getObject().position.y = 10;
