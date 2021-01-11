@@ -103,7 +103,7 @@ var playground = function () {
         audioLoader.load('./data/audio/forest.ogg', function (buffer) {
             sound.setBuffer(buffer);
             sound.setLoop(true);
-            sound.setVolume(0.1);
+            sound.setVolume(0.5);
             sound.play();
         });
 
