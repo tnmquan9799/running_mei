@@ -207,7 +207,16 @@ var playground = function () {
     }
 
     //ANIMATE
+
+    var lastTime = new Date().getTime();
+    var FPS = 0;
     function animate() {
+        var currentTime = new Date().getTime();
+        var deltaTime = (currentTime - lastTime);
+        lastTime = currentTime;
+        FPS = 1000/deltaTime;
+        console.log("FPS: " + FPS);
+        
         requestAnimationFrame(animate);
         const delta = clock.getDelta();
         mixerBook.update(delta);
